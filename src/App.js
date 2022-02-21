@@ -1,25 +1,26 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-
+import Header from './components/Header/Header.jsx'
+import AddPost from './components/AddPost/AddPost'
+import Feed from './components/Feed/Feed'
+import feedHistory from './components/Feed/feedHistory'
 function App() {
+  const [posts, setPosts] = React.useState(feedHistory);
+  const enterPost = (post) => {
+    setPosts([post,...posts])
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app ">
+    <header >
+      <Header />
+    </header>
+    <main >
+      <AddPost enterPost={enterPost}/>
+    </main>
+    <Feed allPosts= {posts} />
     </div>
   );
-}
+} 
 
 export default App;
